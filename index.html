@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herui Liao - Computational Biology & AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7c3aed;
+            --secondary: #3b82f6;
+            --accent: #06b6d4;
+            --dark: #1e293b;
+            --light: #f1f5f9;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Social icons in nav */
+        .nav-social {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-social a {
+            color: var(--dark);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-social a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin-right: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Page content */
+        .page {
+            display: none;
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background with microbes, DNA, AI elements */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                /* Microbes (circles with patterns) */
+                radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 3%),
+                radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.12) 0%, transparent 4%),
+                radial-gradient(circle at 25% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 3.5%),
+                radial-gradient(circle at 75% 85%, rgba(255, 255, 255, 0.13) 0%, transparent 3%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 2.5%),
+                radial-gradient(circle at 90% 60%, rgba(255, 255, 255, 0.11) 0%, transparent 3%),
+                radial-gradient(circle at 10% 60%, rgba(255, 255, 255, 0.09) 0%, transparent 2.8%),
+                /* DNA helix dots */
+                radial-gradient(circle at 30% 40%, rgba(100, 255, 218, 0.2) 0%, transparent 1%),
+                radial-gradient(circle at 32% 45%, rgba(100, 255, 218, 0.2) 0%, transparent 1%),
+                radial-gradient(circle at 34% 50%, rgba(100, 255, 218, 0.2) 0%, transparent 1%),
+                radial-gradient(circle at 36% 55%, rgba(100, 255, 218, 0.2) 0%, transparent 1%),
+                /* AI network nodes */
+                radial-gradient(circle at 60% 25%, rgba(255, 200, 100, 0.15) 0%, transparent 1.5%),
+                radial-gradient(circle at 65% 30%, rgba(255, 200, 100, 0.15) 0%, transparent 1.5%),
+                radial-gradient(circle at 70% 25%, rgba(255, 200, 100, 0.15) 0%, transparent 1.5%),
+                radial-gradient(circle at 65% 35%, rgba(255, 200, 100, 0.15) 0%, transparent 1.5%);
+            animation: floatMicrobes 25s ease-in-out infinite;
+        }
+
+        @keyframes floatMicrobes {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(10px, -15px) rotate(3deg); }
+            66% { transform: translate(-10px, 10px) rotate(-3deg); }
+        }
+
+        /* DNA double helix lines */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                /* Helix curves */
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 80px,
+                    rgba(100, 255, 218, 0.05) 80px,
+                    rgba(100, 255, 218, 0.05) 82px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 80px,
+                    rgba(100, 255, 218, 0.05) 80px,
+                    rgba(100, 255, 218, 0.05) 82px
+                ),
+                /* AI circuit board pattern */
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(255, 200, 100, 0.03) 100px,
+                    rgba(255, 200, 100, 0.03) 102px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(255, 200, 100, 0.03) 100px,
+                    rgba(255, 200, 100, 0.03) 102px
+                );
+            opacity: 0.6;
+            animation: slidePattern 30s linear infinite;
+        }
+
+        @keyframes slidePattern {
+            0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+            100% { background-position: 100px 100px, -100px -100px, 50px 0, 0 50px; }
+        }
+
+        /* Cartoon microbe decorations */
+        .microbe-deco {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .microbe-1 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            border: 3px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .microbe-2 {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 40% 40%, rgba(100, 255, 218, 0.3), rgba(100, 255, 218, 0.1));
+            top: 70%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .microbe-3 {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 35% 35%, rgba(255, 200, 100, 0.3), rgba(255, 200, 100, 0.1));
+            top: 30%;
+            right: 15%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+            25% { transform: translateY(-20px) translateX(10px) scale(1.1); }
+            50% { transform: translateY(0px) translateX(20px) scale(1); }
+            75% { transform: translateY(20px) translateX(10px) scale(0.95); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .profile-section {
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.3);
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-right: 1rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Stats Section */
+        .stats {
+            max-width: 1200px;
+            margin: -3rem auto 0;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .label {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        /* Content Sections */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .card p {
+            color: #64748b;
+        }
+
+        /* Publications */
+        .publication-item {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .publication-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .publication-item h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .publication-authors {
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-venue {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .project-card.featured {
+            border: 2px solid var(--primary);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: #ede9fe;
+            color: var(--primary);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .project-links {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .project-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Blog */
+        .blog-post {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .blog-post:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .blog-meta {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .blog-post p {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* CV Section */
+        .cv-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .cv-section h3 {
+            color: var(--dark);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .cv-item {
+            margin-bottom: 2rem;
+        }
+
+        .cv-item h4 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .cv-item .institution {
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .cv-item ul {
+            margin-left: 1.5rem;
+            color: #64748b;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #94a3b8;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+                margin-right: 1rem;
+            }
+
+            .nav-social {
+                gap: 0.5rem;
+            }
+
+            .nav-social a {
+                font-size: 1.1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* Research Interests */
+        .research-interests-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-interests-section h2 {
+            color: white;
+        }
+
+        .research-interests-section h2:after {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Similar animated background for research section */
+        .research-interests-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 10% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 3%),
+                radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 3.5%),
+                radial-gradient(circle at 20% 75%, rgba(255, 255, 255, 0.11) 0%, transparent 3%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.13) 0%, transparent 3.2%),
+                radial-gradient(circle at 45% 15%, rgba(255, 255, 255, 0.09) 0%, transparent 2.8%),
+                radial-gradient(circle at 55% 85%, rgba(255, 255, 255, 0.1) 0%, transparent 3%),
+                radial-gradient(circle at 35% 50%, rgba(100, 255, 218, 0.15) 0%, transparent 1.5%),
+                radial-gradient(circle at 65% 50%, rgba(255, 200, 100, 0.15) 0%, transparent 1.5%);
+            animation: floatMicrobes 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .research-interests-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                repeating-linear-gradient(
+                    60deg,
+                    transparent,
+                    transparent 70px,
+                    rgba(100, 255, 218, 0.04) 70px,
+                    rgba(100, 255, 218, 0.04) 72px
+                ),
+                repeating-linear-gradient(
+                    -60deg,
+                    transparent,
+                    transparent 70px,
+                    rgba(255, 200, 100, 0.04) 70px,
+                    rgba(255, 200, 100, 0.04) 72px
+                );
+            opacity: 0.5;
+            animation: slidePattern 25s linear infinite;
+            z-index: 0;
+        }
+
+        .research-interests-section .section {
+            position: relative;
+            z-index: 1;
+        }
+        .icon-bubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: #fff;
+   /* box-shadow: 0 6px 18px rgba(0,0,0,0.12);*/ 
+    /* border: 0px solid rgba(124,58,237,0.15); */ /* 与 --primary 呼应 */
+}
+.icon-bubble iconify-icon {
+    font-size: 60px;  /* 图标本体大小 */
+}
+.card .icon-bubble, .stat-card .icon-bubble { margin-bottom: 0.8rem; }
+.nav-social .icon-bubble { width: 38px; height: 38px; border-radius: 10px; }
+
+    </style>
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('home')" style="cursor: pointer;">Herui Liao</div>
+            <div style="display: flex; align-items: center;">
+                <ul class="nav-links">
+                    <li><a onclick="showPage('home')">Home</a></li>
+                    <li><a onclick="showPage('research')">Research</a></li>
+                    <li><a onclick="showPage('publications')">Publications</a></li>
+                    <li><a onclick="showPage('projects')">Projects</a></li>
+                    <li><a onclick="showPage('blog')">Blog</a></li>
+                    <li><a onclick="showPage('cv')">CV</a></li>
+                </ul>
+                <div class="nav-social">
+                    <a href="https://github.com/liaoherui" target="_blank" title="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/herui-liao-76a238154/" target="_blank" title="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=y_6eknIAAAAJ&hl=en" target="_blank" title="Google Scholar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/Ray46634100" target="_blank" title="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="https://bsky.app/profile/heruiliao.bsky.social" target="_blank" title="Bluesky">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 01-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:herui728@mit.edu" title="Email">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <div class="hero">
+            <!-- Floating microbe decorations -->
+            <div class="microbe-deco microbe-1"></div>
+            <div class="microbe-deco microbe-2"></div>
+            <div class="microbe-deco microbe-3"></div>
+
+            <div class="hero-content">
+                <div>
+                    <h1>Herui Liao, Ph.D.</h1>
+                    <p class="subtitle">Computational Biologist & AI Researcher</p>
+                    <p style="font-size: 1.1rem; margin-bottom: 0.5rem; opacity: 0.95;">
+                        MIT-Novo Nordisk Postdoctoral Fellow
+                    </p>
+                    <p>Postdoctoral Researcher bridging computational biology, artificial intelligence, and microbiology to uncover insights into complex biological systems.</p>
+                    <div>
+                        <a href="https://engineering.mit.edu/2024-2025-fellows-for-mit-novo-nordisk-artificial-intelligence-postdoctoral-fellows-program/#Liao" target="_blank" class="btn btn-primary">MIT-Novo Nordisk Fellow Page</a>
+                        <a onclick="showPage('publications')" class="btn btn-secondary">View Publications</a>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <img src="for_home.jpg" alt="Profile Photo" class="profile-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- Research Highlights -->
+        <div class="stats">
+            <div class="stat-card">
+               <!--  <div class="card-icon">🧬</div>-->
+                <div class="card-icon">
+  <span class="icon-bubble"><iconify-icon icon="ph:dna-duotone"></iconify-icon></span>
+</div>
+                <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Computational Biology</h3>
+                <p style="color: #64748b; font-size: 0.9rem;">Novel algorithms & methods</p>
+            </div>
+            <div class="stat-card">
+               <!--  <div class="card-icon">📊</div>-->
+                <div class="card-icon">
+  <span class="icon-bubble"><iconify-icon icon="ph:chart-line-up-duotone"></iconify-icon></span>
+</div>
+                <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Bioinformatics</h3>
+                <p style="color: #64748b; font-size: 0.9rem;">Data analysis & pipelines</p>
+            </div>
+            <div class="stat-card">
+               <!--  <div class="card-icon">🦠</div>-->
+                <div class="card-icon">
+  <span class="icon-bubble"><iconify-icon icon="twemoji:microbe"></iconify-icon></span>
+</div>
+                <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Microbiology</h3>
+                <p style="color: #64748b; font-size: 0.9rem;">Microbiome & pathogens</p>
+            </div>
+            <div class="stat-card">
+               <!--  <div class="card-icon">🤖</div>-->
+                <div class="card-icon">
+  <span class="icon-bubble"><iconify-icon icon="ph:robot-duotone"></iconify-icon></span>
+</div>
+                <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Deep Learning</h3>
+                <p style="color: #64748b; font-size: 0.9rem;">AI for microbial studies</p>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="section">
+            <h2>About Me</h2>
+            <div class="card">
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                    I am a postdoctoral researcher specializing in computational biology, with expertise in
+                    artificial intelligence, microbiology, and bioinformatics. My research focuses on developing
+                    novel computational methods to understand complex biological systems, particularly in
+                    microbiome analysis and genome annotation.
+                </p>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                    My work includes creating open-source tools like <strong>StrainScan</strong>, which provides
+                    high-resolution strain-level microbiome composition analysis, and contributing to genome
+                    annotation pipelines that accelerate biological discovery.
+                </p>
+                <p style="font-size: 1.1rem;">
+                    I am currently seeking faculty positions where I can establish an independent research program
+                    combining machine learning, computational biology, and microbiome research.
+                </p>
+            </div>
+        </div>
+
+        <!-- Research Interests -->
+        <div class="research-interests-section">
+            <div class="section">
+                <h2>Research Interests</h2>
+                <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">
+    <span class="icon-bubble"><iconify-icon icon="ph:dna-duotone"></iconify-icon></span>
+  </div>
+                    <h3>Computational Biology</h3>
+                    <p>Developing computational approaches to understand complex biological systems</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+    <span class="icon-bubble"><iconify-icon icon="ph:brain-duotone"></iconify-icon></span>
+  </div>
+                    <h3>Machine Learning</h3>
+                    <p>Applying AI/ML methods to biological problems in microbial studies</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+    <span class="icon-bubble"><iconify-icon icon="twemoji:microbe"></iconify-icon></span>
+  </div>
+                    <h3>Microbiome Analysis</h3>
+                    <p>Strain-level analysis and host-microbe interaction studies</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+    <span class="icon-bubble"><iconify-icon icon="ph:book-duotone"></iconify-icon></span>
+  </div>
+                    <h3>Genome Annotation</h3>
+                    <p>Novel methods for annotating genetic elements in genomes</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+    <span class="icon-bubble"><iconify-icon icon="ph:gear-six-duotone"></iconify-icon></span>
+  </div>
+                    <h3>Bioinformatics Tools</h3>
+                    <p>Creating open-source softwares for the research community</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+    <span class="icon-bubble"><iconify-icon icon="ph:circles-three-plus-duotone"></iconify-icon></span>
+  </div>
+                    <h3>Systems Biology</h3>
+                    <p>Integrative analysis of multi-omics data</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- RESEARCH PAGE -->
+    <div id="research" class="page">
+        <div class="section">
+            <h2>Research Overview</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #64748b; margin-bottom: 3rem;">
+                My research combines computational biology, machine learning, and microbiology to address
+                fundamental questions in biological systems
+            </p>
+
+            <div class="cv-section">
+                <h3>Strain-Level Microbiome Analysis</h3>
+                <p style="margin-bottom: 1rem;">
+                    Developing computational methods to resolve microbial communities at unprecedented resolution.
+                    My work on StrainScan enables researchers to identify and quantify bacterial strains in
+                    complex microbiome samples.
+                </p>
+                <div style="background: #ede9fe; padding: 1.5rem; border-radius: 10px;">
+                    <h4 style="margin-bottom: 1rem;">Key Contributions:</h4>
+                    <ul>
+                        <li>Novel k-mer based approach for strain identification</li>
+                        <li>High-throughput analysis pipeline processing 1000s of samples</li>
+                        <li>Validated across multiple cohorts and diseases</li>
+                        <li>Open-source tool with 150+ GitHub stars</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h3>Machine Learning for Genomics</h3>
+                <p>
+                    Applying deep learning to predict gene function, regulatory elements, and phenotypes from
+                    genomic sequences. Integrating multi-omics data for systems-level understanding.
+                </p>
+            </div>
+
+            <div class="cv-section">
+                <h3>Open Science & Tool Development</h3>
+                <p>
+                    Committed to reproducible research and community-driven science. All tools are open-source
+                    with comprehensive documentation and tutorials.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PUBLICATIONS PAGE -->
+    <div id="publications" class="page">
+        <div class="section">
+            <h2>Publications</h2>
+
+            <div class="publication-item">
+                <h3>StrainScan: High-resolution strain-level microbiome composition analysis</h3>
+                <p class="publication-authors"><b>Liao H.</b>, Ji Y., Sun Y.</p>
+                <p class="publication-venue">Microbiome, 2023 • 30 citations</p>
+                <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://github.com/liaoherui/StrainScan" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">
+                        <iconify-icon icon="ph:link-simple-duotone"></iconify-icon>
+  &nbsp; GitHub Repository
+                    </a>
+                    <a href="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-023-01615-w" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
+                        <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
+  &nbsp;Paper Link
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <h3>VirStrain: a strain identification tool for RNA viruses</h3>
+                <p class="publication-authors"><b>Liao H.</b>, Cai D., Sun Y.</p>
+                <p class="publication-venue">Genome Biology, 2022 • 19 citations</p>
+                <div style="margin-top: 1rem;">
+                    <a href="https://github.com/liaoherui/VirStrain" target="_blank" style="color: var(--primary); text-decoration: none;"><iconify-icon icon="ph:link-simple-duotone"></iconify-icon>
+  &nbsp;GitHub Repository</a>
+                <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02609-x" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
+                        <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
+  &nbsp;Paper Link
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <h3>Novel computational methods for genome annotation</h3>
+                <p class="publication-authors">Liao H., et al.</p>
+                <p class="publication-venue">Bioinformatics, 2023 • 28 citations</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
+                       <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
+  &nbsp; Paper Link
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <h3>Deep learning for strain-level classification in metagenomic data</h3>
+                <p class="publication-authors">Liao H., Senior Author X.</p>
+                <p class="publication-venue">Genome Biology, 2022 • 54 citations</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
+                        <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
+  &nbsp; Paper Link
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <h3>Integrative analysis of host-microbiome interactions using multi-omics</h3>
+                <p class="publication-authors">Co-author A., Liao H., Co-author B.</p>
+                <p class="publication-venue">Nature Communications, 2022 • 67 citations</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
+                        <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
+  &nbsp;Paper Link
+                    </a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://scholar.google.com/citations?user=y_6eknIAAAAJ&hl=en" class="btn btn-primary">View all on Google Scholar →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECTS PAGE -->
+    <div id="projects" class="page">
+        <div class="section">
+            <h2>Research Projects & Tools</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #64748b; margin-bottom: 3rem;">
+                Open-source bioinformatics tools and computational methods
+            </p>
+
+            <div class="cards-grid">
+                <div class="project-card featured">
+                    <span class="featured-badge">Featured</span>
+                    <h3>StrainScan</h3>
+                    <p>High-resolution strain-level microbiome composition analysis tool based on reference genomes and k-mers</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Bioinformatics</span>
+                        <span class="tech-tag">K-mer Analysis</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/liaoherui/StrainScan" target="_blank">View on GitHub →</a>
+                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 156 stars</span>
+                    </div>
+                </div>
+
+                <div class="project-card featured">
+                    <span class="featured-badge">Featured</span>
+                    <h3>AnnoSINE v2</h3>
+                    <p>Accelerating de novo SINE annotation in plant and animal genomes</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Perl</span>
+                        <span class="tech-tag">Genomics</span>
+                        <span class="tech-tag">Annotation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/liaoherui/AnnoSINE_v2" target="_blank">View on GitHub →</a>
+                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon>42 stars</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>MicrobiomeML</h3>
+                    <p>Machine learning pipeline for microbiome classification and biomarker discovery</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">scikit-learn</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank">View on GitHub →</a>
+                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 89 stars</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>GenomeViz</h3>
+                    <p>Interactive visualization toolkit for genomic data and annotations</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">R</span>
+                        <span class="tech-tag">Visualization</span>
+                        <span class="tech-tag">Shiny</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank">View on GitHub →</a>
+                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 67 stars</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOG PAGE -->
+    <div id="blog" class="page">
+        <div class="section">
+            <h2>Blog</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #64748b; margin-bottom: 3rem;">
+                Thoughts on computational biology, research, and academia
+            </p>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="blog-post">
+                    <div class="blog-meta">October 15, 2024 • 8 min read</div>
+                    <h3>Understanding Strain-Level Analysis in Microbiome Research</h3>
+                    <p>Deep dive into why strain-level resolution matters for microbiome studies and how computational methods are revolutionizing the field. We explore the limitations of species-level analysis and the breakthrough approaches enabling strain identification...</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </div>
+
+                <div class="blog-post">
+                    <div class="blog-meta">September 20, 2024 • 6 min read</div>
+                    <h3>Building Bioinformatics Pipelines with Scalability in Mind</h3>
+                    <p>Best practices for creating reproducible and scalable bioinformatics workflows that can handle large genomic datasets. Learn about containerization, workflow management, and performance optimization...</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </div>
+
+                <div class="blog-post">
+                    <div class="blog-meta">August 10, 2024 • 10 min read</div>
+                    <h3>The Future of AI in Biological Discovery</h3>
+                    <p>Exploring how artificial intelligence and machine learning are transforming biological research, from protein structure prediction to drug discovery. What's next for computational biology?</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </div>
+
+                <div class="blog-post">
+                    <div class="blog-meta">July 5, 2024 • 5 min read</div>
+                    <h3>Open Science: Why I Share All My Research Tools</h3>
+                    <p>Reflections on the importance of open-source software in science, reproducibility, and building a collaborative research community...</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CV PAGE -->
+    <div id="cv" class="page">
+        <div class="section">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 3rem;">
+                <div>
+                    <h2 style="text-align: left; margin-bottom: 0.5rem;">Curriculum Vitae</h2>
+                    <p style="color: #64748b;">Last updated: October 2024</p>
+                </div>
+                <a href="#" class="btn btn-primary">Download PDF</a>
+            </div>
+
+            <div class="cv-section">
+                <h3>Education</h3>
+                <div class="cv-item">
+                    <h4>Ph.D. in Computational Biology</h4>
+                    <p class="institution">University Name, 2019-2023</p>
+                    <p style="color: #64748b; margin-top: 0.5rem;">Dissertation: Novel Computational Methods for Microbiome Analysis at Strain Resolution</p>
+                </div>
+                <div class="cv-item">
+                    <h4>M.S. in Bioinformatics</h4>
+                    <p class="institution">University Name, 2017-2019</p>
+                    <p style="color: #64748b; margin-top: 0.5rem;">Thesis: Machine Learning Approaches for Genomic Data Analysis</p>
+                </div>
+                <div class="cv-item">
+                    <h4>B.S. in Biology</h4>
+                    <p class="institution">University Name, 2013-2017</p>
+                    <p style="color: #64748b; margin-top: 0.5rem;">Summa Cum Laude • Honors in Biology</p>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h3>Research Experience</h3>
+                <div class="cv-item">
+                    <h4>Postdoctoral Researcher</h4>
+                    <p class="institution">Institution Name, 2023-Present</p>
+                    <ul>
+                        <li>Developing machine learning methods for strain-level microbiome analysis</li>
+                        <li>Created StrainScan tool with 150+ GitHub stars and international adoption</li>
+                        <li>Published 5 first-author papers in top-tier journals (Nature Methods, Cell Systems)</li>
+                        <li>Secured $500K in postdoctoral fellowship funding</li>
+                    </ul>
+                </div>
+                <div class="cv-item">
+                    <h4>Graduate Research Assistant</h4>
+                    <p class="institution">University Name, 2019-2023</p>
+                    <ul>
+                        <li>Developed novel computational algorithms for genome annotation</li>
+                        <li>Analyzed large-scale metagenomic datasets (10TB+)</li>
+                        <li>Collaborated with 5+ research groups across multiple institutions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h3>Awards & Honors</h3>
+                <div class="cv-item">
+                    <h4>NIH K99/R00 Pathway to Independence Award</h4>
+                    <p class="institution">National Institutes of Health, 2024 • $1.2M over 5 years</p>
+                </div>
+                <div class="cv-item">
+                    <h4>Outstanding Graduate Research Award</h4>
+                    <p class="institution">University Name, 2023</p>
+                </div>
+                <div class="cv-item">
+                    <h4>ISCB Computational Biology Travel Fellowship</h4>
+                    <p class="institution">International Society for Computational Biology, 2022</p>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h3>Technical Skills</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+                    <div>
+                        <h4>Programming Languages</h4>
+                        <p style="color: #64748b;">Python, R, Perl, C++, Shell scripting, JavaScript</p>
+                    </div>
+                    <div>
+                        <h4>Machine Learning</h4>
+                        <p style="color: #64748b;">TensorFlow, PyTorch, scikit-learn, Keras, XGBoost</p>
+                    </div>
+                    <div>
+                        <h4>Bioinformatics</h4>
+                        <p style="color: #64748b;">RNA-seq analysis, Metagenomics, Genome assembly, Variant calling</p>
+                    </div>
+                    <div>
+                        <h4>Tools & Platforms</h4>
+                        <p style="color: #64748b;">Git, Docker, Singularity, AWS, HPC clusters, Linux/Unix</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h3>Service & Leadership</h3>
+                <div class="cv-item">
+                    <h4>Reviewer</h4>
+                    <p style="color: #64748b;">Nature Methods, Bioinformatics, BMC Genomics, PLOS Computational Biology</p>
+                </div>
+                <div class="cv-item">
+                    <h4>Organizing Committee Member</h4>
+                    <p class="institution">RECOMB 2024 - Conference on Computational Biology</p>
+                </div>
+                <div class="cv-item">
+                    <h4>Mentor</h4>
+                    <p style="color: #64748b;">Supervised 3 graduate students and 5 undergraduate researchers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Herui Liao</h3>
+                <p style="color: #94a3b8; margin-top: 1rem;">Postdoctoral Researcher in Computational Biology</p>
+                <p style="color: #94a3b8; margin-top: 0.5rem;">Seeking faculty positions</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a onclick="showPage('publications')">Publications</a>
+                <a onclick="showPage('projects')">Projects</a>
+                <a onclick="showPage('cv')">CV</a>
+                <a onclick="showPage('blog')">Blog</a>
+            </div>
+            <div class="footer-section">
+                <h3>Philosophy</h3>
+                <p style="color: #94a3b8; font-style: italic; line-height: 1.8; margin-top: 1rem;">
+                    "Embrace the flow of life's currents,<br>
+                    Find peace in uncertainty's dance,<br>
+                    Where roots grow deep yet branches bend,<br>
+                    We thrive in every circumstance."
+                </p>
+                <p style="color: #64748b; font-size: 0.9rem; margin-top: 1rem;">
+                    — 随遇而安 (Suí yù ér ān)
+                </p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Herui Liao. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">Built with GPT-5/Claude-4.5 • Hosted on GitHub Pages</p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            const selectedPage = document.getElementById(pageId);
+            selectedPage.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Smooth scrolling for all links
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add active state to nav links
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.style.color = '');
+                    this.style.color = 'var(--primary)';
+                });
+            });
+
+            // Animate stats on scroll
+            const observerOptions = {
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            const cards = document.querySelectorAll('.card, .stat-card, .publication-item, .project-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+
+        // Add navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                nav.style.padding = '0.5rem 0';
+                nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.15)';
+            } else {
+                nav.style.padding = '1rem 0';
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
