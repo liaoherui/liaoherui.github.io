@@ -943,7 +943,7 @@
     <span class="icon-bubble"><iconify-icon icon="ph:gear-six-duotone"></iconify-icon></span>
   </div>
                     <h3>Bioinformatics Tools</h3>
-                    <p>Creating open-source softwares for the research community</p>
+                    <p>Creating open-source softwares and web servers for the research community</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">
@@ -970,16 +970,15 @@
                 <h3>Strain-Level Microbiome Analysis</h3>
                 <p style="margin-bottom: 1rem;">
                     Developing computational methods to resolve microbial communities at unprecedented resolution.
-                    My work on StrainScan enables researchers to identify and quantify bacterial strains in
+                    My work on VirStrain and StrainScan enables researchers to identify and quantify viral and bacterial strains in
                     complex microbiome samples.
                 </p>
                 <div style="background: #ede9fe; padding: 1.5rem; border-radius: 10px;">
                     <h4 style="margin-bottom: 1rem;">Key Contributions:</h4>
                     <ul>
                         <li>Novel k-mer based approach for strain identification</li>
-                        <li>High-throughput analysis pipeline processing 1000s of samples</li>
-                        <li>Validated across multiple cohorts and diseases</li>
-                        <li>Open-source tool with 150+ GitHub stars</li>
+                        <li>High-throughput analysis pipeline processing large-scale samples</li>
+                        <li>Validated across multiple cohorts and datasets</li>
                     </ul>
                 </div>
             </div>
@@ -990,13 +989,22 @@
                     Applying deep learning to predict gene function, regulatory elements, and phenotypes from
                     genomic sequences. Integrating multi-omics data for systems-level understanding.
                 </p>
+                <div style="background: #ede9fe; padding: 1.5rem; border-radius: 10px;">
+                    <h4 style="margin-bottom: 1rem;">Key Contributions:</h4>
+                    <ul>
+                        <li>Apply GCN and domain adaptation to enhance cross-study disease prediction</li>
+                        <li>Use multimodal transformer to improve the accuracy of AMR prediction</li>
+                        <li>Utilize across-sample patterns learned by CNN to achieve high-precision SNV calling for bacterial isolates</li>
+                        <li>Environment-aware representation learning for microbial data</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="cv-section">
                 <h3>Open Science & Tool Development</h3>
                 <p>
                     Committed to reproducible research and community-driven science. All tools are open-source
-                    with comprehensive documentation and tutorials.
+                    with comprehensive documentation and tutorials. All tools are publicly available via <a href="https://github.com/liaoherui" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">GitHub</a>.
                 </p>
             </div>
         </div>
@@ -1006,6 +1014,42 @@
     <div id="publications" class="page">
         <div class="section">
             <h2>Publications</h2>
+
+            <div class="publication-item">
+                <h3>High-accuracy SNV calling for bacterial isolates using deep learning with AccuSNV</h3>
+                <p class="publication-authors"><b>Liao H.</b>, Conwill A., et al.</p>
+                <p class="publication-venue">bioRxiv, 2025 • 0 citation</p>
+                <div style="margin-top: 1rem;">
+                    <a href="https://academic.oup.com/bioinformatics/article/39/12/btad747/7470738" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
+                        <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
+  &nbsp; Paper Link
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <h3>Accelerating de novo SINE annotation in plant and animal genomes</h3>
+                <p class="publication-authors"><b>Liao H.</b>, Ou S., Sun Y.</p>
+                <p class="publication-venue">Mobile DNA, 2024 • 1 citation</p>
+                <div style="margin-top: 1rem;">
+                    <a href="https://academic.oup.com/bioinformatics/article/39/12/btad747/7470738" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
+                        <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
+  &nbsp; Paper Link
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <h3>GDmicro: classifying host disease status with GCN and deep adaptation network based on the human gut microbiome data</h3>
+                <p class="publication-authors"><b>Liao H.</b>, Shang J., Sun Y.</p>
+                <p class="publication-venue">Bioinformatics, 2023 • 10 citations</p>
+                <div style="margin-top: 1rem;">
+                    <a href="https://academic.oup.com/bioinformatics/article/39/12/btad747/7470738" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
+                        <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
+  &nbsp; Paper Link
+                    </a>
+                </div>
+            </div>
 
             <div class="publication-item">
                 <h3>StrainScan: High-resolution strain-level microbiome composition analysis</h3>
@@ -1038,9 +1082,9 @@
             </div>
 
             <div class="publication-item">
-                <h3>Novel computational methods for genome annotation</h3>
-                <p class="publication-authors">Liao H., et al.</p>
-                <p class="publication-venue">Bioinformatics, 2023 • 28 citations</p>
+                <h3>Characterizing the Host Coral Proteome of Platygyra carnosa Using Suspension Trapping (S-Trap)</h3>
+                <p class="publication-authors">Ma H.<sup>*</sup>, <b>Liao H.<sup>*</sup></b>, et al.</p>
+                <p class="publication-venue">Journal of Proteome Research, 2021 • 14 citations</p>
                 <div style="margin-top: 1rem;">
                     <a href="#" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
                        <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
@@ -1049,22 +1093,12 @@
                 </div>
             </div>
 
-            <div class="publication-item">
-                <h3>Deep learning for strain-level classification in metagenomic data</h3>
-                <p class="publication-authors">Liao H., Senior Author X.</p>
-                <p class="publication-venue">Genome Biology, 2022 • 54 citations</p>
-                <div style="margin-top: 1rem;">
-                    <a href="#" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
-                        <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
-  &nbsp; Paper Link
-                    </a>
-                </div>
-            </div>
+
 
             <div class="publication-item">
-                <h3>Integrative analysis of host-microbiome interactions using multi-omics</h3>
-                <p class="publication-authors">Co-author A., Liao H., Co-author B.</p>
-                <p class="publication-venue">Nature Communications, 2022 • 67 citations</p>
+                <h3>A comprehensive investigation of metagenome assembly by linked-read sequencing</h3>
+                <p class="publication-authors">Zhang L.<sup>*</sup>, Fang X.<sup>*</sup>, <b>Liao H.<sup>*</sup></b>, et al.</p>
+                <p class="publication-venue">Microbiome, 2020 • 24 citations</p>
                 <div style="margin-top: 1rem;">
                     <a href="#" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: 600;">
                         <iconify-icon icon="ph:file-text-duotone"></iconify-icon>
@@ -1089,7 +1123,7 @@
 
             <div class="cards-grid">
                 <div class="project-card featured">
-                    <span class="featured-badge">Featured</span>
+                    <span class="featured-badge">Published</span>
                     <h3>StrainScan</h3>
                     <p>High-resolution strain-level microbiome composition analysis tool based on reference genomes and k-mers</p>
                     <div class="tech-tags">
@@ -1099,50 +1133,70 @@
                     </div>
                     <div class="project-links">
                         <a href="https://github.com/liaoherui/StrainScan" target="_blank">View on GitHub →</a>
-                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 156 stars</span>
+                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 43 stars</span>
                     </div>
                 </div>
 
                 <div class="project-card featured">
-                    <span class="featured-badge">Featured</span>
-                    <h3>AnnoSINE v2</h3>
-                    <p>Accelerating de novo SINE annotation in plant and animal genomes</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Perl</span>
-                        <span class="tech-tag">Genomics</span>
-                        <span class="tech-tag">Annotation</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/liaoherui/AnnoSINE_v2" target="_blank">View on GitHub →</a>
-                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon>42 stars</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>MicrobiomeML</h3>
-                    <p>Machine learning pipeline for microbiome classification and biomarker discovery</p>
+                    <span class="featured-badge">Published</span>
+                    <h3>VirStrain</h3>
+                    <p>An RNA virus strain-level identification tool for short reads</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
-                        <span class="tech-tag">TensorFlow</span>
-                        <span class="tech-tag">scikit-learn</span>
+                        <span class="tech-tag">RNA virus</span>
+                        <span class="tech-tag">Strain Identification</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" target="_blank">View on GitHub →</a>
-                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 89 stars</span>
+                        <a href="https://github.com/liaoherui/VirStrain" target="_blank">View on GitHub →</a>
+                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon>22 stars</span>
+                    </div>
+                </div>
+
+                <div class="project-card featured">
+                    <span class="featured-badge">Published</span>
+                    <h3>GDmicro</h3>
+                    <p>Use GCN and Deep adaptation network to classify host disease status based on human gut microbiome data.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pytorch</span>
+                        <span class="tech-tag">GCN</span>
+                        <span class="tech-tag">Domain Adaptation</span>
+                        <span class="tech-tag">Biomarker Discovery</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/liaoherui/GDmicro" target="_blank">View on GitHub →</a>
+                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 11 stars</span>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <h3>GenomeViz</h3>
-                    <p>Interactive visualization toolkit for genomic data and annotations</p>
+                    <h3>AccuSNV</h3>
+                    <p>High-accuracy SNV calling for bacterial isolates using deep learning</p>
                     <div class="tech-tags">
-                        <span class="tech-tag">R</span>
-                        <span class="tech-tag">Visualization</span>
-                        <span class="tech-tag">Shiny</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Snakemake</span>
+                        <span class="tech-tag">Pytorch</span>
+                        <span class="tech-tag">CNN</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" target="_blank">View on GitHub →</a>
-                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 67 stars</span>
+                        <a href="https://github.com/liaoherui/AccuSNV" target="_blank">View on GitHub →</a>
+                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 6 stars</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>StrainAMR</h3>
+                    <p>A learning-based tool to predict antimicrobial resistance and identify AMR-related genomic features from bacterial strain genomes</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pytorch</span>
+                        <span class="tech-tag">Transformer</span>
+                        <span class="tech-tag">Multimodal modeling</span>
+                        <span class="tech-tag">Shap</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/liaoherui/StrainAMR" target="_blank">View on GitHub →</a>
+                        <span style="color: #64748b;"><iconify-icon icon="ph:star-duotone"></iconify-icon> 1 stars</span>
                     </div>
                 </div>
             </div>
@@ -1195,7 +1249,7 @@
             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 3rem;">
                 <div>
                     <h2 style="text-align: left; margin-bottom: 0.5rem;">Curriculum Vitae</h2>
-                    <p style="color: #64748b;">Last updated: October 2024</p>
+                    <p style="color: #64748b;">Last updated: November 2025</p>
                 </div>
                 <a href="#" class="btn btn-primary">Download PDF</a>
             </div>
@@ -1204,18 +1258,18 @@
                 <h3>Education</h3>
                 <div class="cv-item">
                     <h4>Ph.D. in Computational Biology</h4>
-                    <p class="institution">University Name, 2019-2023</p>
-                    <p style="color: #64748b; margin-top: 0.5rem;">Dissertation: Novel Computational Methods for Microbiome Analysis at Strain Resolution</p>
+                    <p class="institution">City University of Hong Kong, 2019-2024</p>
+                    <p style="color: #64748b; margin-top: 0.5rem;">Dissertation: Computational Methods for High-resolution Microbial Composition Analysis and Relevant Applications</p>
                 </div>
+<!--                <div class="cv-item">-->
+<!--                    <h4>M.S. in Bioinformatics</h4>-->
+<!--                    <p class="institution">University Name, 2017-2019</p>-->
+<!--                    <p style="color: #64748b; margin-top: 0.5rem;">Thesis: Machine Learning Approaches for Genomic Data Analysis</p>-->
+<!--                </div>-->
                 <div class="cv-item">
-                    <h4>M.S. in Bioinformatics</h4>
-                    <p class="institution">University Name, 2017-2019</p>
-                    <p style="color: #64748b; margin-top: 0.5rem;">Thesis: Machine Learning Approaches for Genomic Data Analysis</p>
-                </div>
-                <div class="cv-item">
-                    <h4>B.S. in Biology</h4>
-                    <p class="institution">University Name, 2013-2017</p>
-                    <p style="color: #64748b; margin-top: 0.5rem;">Summa Cum Laude • Honors in Biology</p>
+                    <h4>B.S. in Bioinformatics</h4>
+                    <p class="institution">Dalian University of Technology, 2014-2018</p>
+                    <p style="color: #64748b; margin-top: 0.5rem;">GPA: 3.3/4.0 • Honors in Bioinformatics</p>
                 </div>
             </div>
 
@@ -1223,12 +1277,11 @@
                 <h3>Research Experience</h3>
                 <div class="cv-item">
                     <h4>Postdoctoral Researcher</h4>
-                    <p class="institution">Institution Name, 2023-Present</p>
+                    <p class="institution">Massachusetts Institute of Technology, 2024-Present</p>
                     <ul>
-                        <li>Developing machine learning methods for strain-level microbiome analysis</li>
-                        <li>Created StrainScan tool with 150+ GitHub stars and international adoption</li>
-                        <li>Published 5 first-author papers in top-tier journals (Nature Methods, Cell Systems)</li>
-                        <li>Secured $500K in postdoctoral fellowship funding</li>
+                        <li>Developing machine learning methods for high-accuracy SNV calling of bacterial isolates</li>
+                        <li>Building AI foundation model for microbial studies</li>
+                        <li>Secured $150K in postdoctoral fellowship funding</li>
                     </ul>
                 </div>
                 <div class="cv-item">
