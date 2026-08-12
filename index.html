@@ -38,6 +38,7 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             z-index: 1000;
+            transition: box-shadow 0.3s ease;
         }
 
         .nav-container {
@@ -59,6 +60,11 @@
         }
 
         /* Social icons in nav */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+        }
+
         .nav-social {
             display: flex;
             align-items: center;
@@ -789,17 +795,140 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .nav-container {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 0.55rem 0.75rem;
+                align-items: center;
+                padding: 0.65rem 1rem 0.75rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+                line-height: 1.1;
+            }
+
+            .nav-actions {
+                display: contents;
+            }
+
+            .lang-toggle {
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: end;
+                min-height: 32px;
+                padding: 0.38rem 0.72rem;
+                margin-left: 0;
+                font-size: 0.82rem;
+            }
+
+            .nav-social {
+                grid-column: 1 / -1;
+                grid-row: 2;
+                width: 100%;
+                justify-content: center;
+                gap: 0.35rem;
+            }
+
+            .nav-social a {
+                width: 32px;
+                height: 32px;
+                justify-content: center;
+                border: 1px solid #e2e8f0;
+                border-radius: 10px;
+                background: #f8fafc;
+                font-size: 1rem;
+            }
+
+            .nav-social a:hover {
+                background: #ede9fe;
+                transform: none;
+            }
+
+            .nav-social svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .nav-links {
+                grid-column: 1 / -1;
+                grid-row: 3;
+                width: 100%;
+                gap: 0.4rem;
+                margin-right: 0;
+                padding: 0.15rem 0.05rem 0.25rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                overflow: visible;
+            }
+
+            .nav-links li {
+                flex: 0 0 auto;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.32rem 0.62rem;
+                border: 1px solid #e2e8f0;
+                border-radius: 999px;
+                background: #f8fafc;
+                font-size: 0.82rem;
+                line-height: 1.2;
+                white-space: nowrap;
+            }
+
+            .page {
+                padding-top: 176px;
+            }
+
+            .hero {
+                padding: 2.2rem 1rem 2.6rem;
+            }
+
             .hero-content {
                 grid-template-columns: 1fr;
+                gap: 1.4rem;
                 text-align: center;
             }
 
             .hero h1 {
                 font-size: 2rem;
+                margin-bottom: 0.55rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.12rem;
+                margin-bottom: 0.55rem;
+            }
+
+            .hero p {
+                font-size: 0.98rem;
+                margin-bottom: 1.1rem;
+            }
+
+            .hero .btn {
+                margin: 0.3rem 0.25rem 0;
+                padding: 0.72rem 1.05rem;
             }
 
             .stats {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.8rem;
+                margin: 1rem auto 0;
+                padding: 0 1rem;
+            }
+
+            .stat-card {
+                padding: 1.1rem 0.8rem;
+                border-radius: 12px;
+            }
+
+            .stat-card .number {
+                font-size: 1.8rem;
+            }
+
+            .stat-card .label {
+                font-size: 0.85rem;
             }
 
             .opening-banner,
@@ -807,43 +936,129 @@
                 grid-template-columns: 1fr;
             }
 
+            .opening-banner {
+                margin: 1rem 1rem 0;
+                padding: 1.2rem;
+                gap: 1rem;
+                border-radius: 12px;
+            }
+
+            .opening-banner h2 {
+                font-size: 1.25rem;
+            }
+
             .opening-actions {
                 justify-content: flex-start;
+                gap: 0.6rem;
             }
 
-            .nav-links {
+            .opening-actions .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .section {
+                padding: 2.6rem 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 2.2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
                 gap: 1rem;
-                font-size: 0.9rem;
-                margin-right: 1rem;
             }
 
-            .nav-social {
-                gap: 0.5rem;
+            .card,
+            .publication-item,
+            .project-card,
+            .blog-post,
+            .cv-section,
+            .join-card {
+                padding: 1.25rem;
+                border-radius: 12px;
             }
 
-            .nav-social a {
-                font-size: 1.1rem;
+            .card:hover,
+            .publication-item:hover,
+            .project-card:hover {
+                transform: none;
             }
 
-            .lang-toggle {
-                padding: 0.4rem 0.75rem;
-                font-size: 0.85rem;
-                margin-left: 0.75rem;
+            .project-links {
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                gap: 0.65rem;
+            }
+
+            .join-intro {
+                text-align: left;
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .join-grid {
+                gap: 1rem;
+            }
+
+            .cv-section h3 {
+                font-size: 1.35rem;
             }
 
             .footer-content {
-            grid-template-columns: 1fr;
-        }
+                grid-template-columns: 1fr;
+            }
 
             /* 手机端地图不要太大 */
             #clustrmaps {
-            max-width: 100% !important;
-            width: 250px !important;
-        }
+                max-width: 100% !important;
+                width: 250px !important;
+            }
+
+            footer {
+                padding: 2.4rem 1rem;
+            }
+
+            footer .footer-section {
+                transform: none !important;
+            }
 
             .profile-img {
-                width: 200px;
-                height: 200px;
+                width: 180px;
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .nav-container {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+
+            .logo {
+                font-size: 1.08rem;
+            }
+
+            .nav-social a {
+                width: 30px;
+                height: 30px;
+            }
+
+            .nav-social svg {
+                width: 17px;
+                height: 17px;
+            }
+
+            .nav-links a {
+                font-size: 0.78rem;
+                padding: 0.3rem 0.55rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
             }
         }
 
@@ -940,7 +1155,7 @@
     <nav>
         <div class="nav-container">
             <div class="logo" onclick="showPage('home')" style="cursor: pointer;">Herui Liao</div>
-            <div style="display: flex; align-items: center;">
+            <div class="nav-actions">
                 <ul class="nav-links">
                     <li><a onclick="showPage('home')">Home</a></li>
                     <li><a onclick="showPage('research')">Research</a></li>
@@ -1872,8 +2087,8 @@
             ['footer .footer-section:nth-child(2) a:nth-child(4)', 'Join Us', '加入我们'],
             ['footer .footer-section:nth-child(2) a:nth-child(5)', 'CV', '简历'],
             ['footer .footer-section:nth-child(3) h3', 'Global Visitors 🌍', '全球访问者'],
-            ['footer .footer-section:nth-child(4) h3', 'Philosophy', '理念'],
-            ['footer .footer-section:nth-child(4) p:nth-of-type(1)', "\"Embrace the flow of life's currents,<br>Find peace in uncertainty's dance,<br>Where roots grow deep yet branches bend,<br>We thrive in every circumstance.\"", '随遇而安，<br>在不确定中保持平静，<br>根扎得深，枝也能随风舒展，<br>在变化中继续生长。', true],
+            ['footer .footer-section:nth-child(4) h3', 'Philosophy', 'Philosophy'],
+            ['footer .footer-section:nth-child(4) p:nth-of-type(1)', "\"Embrace the flow of life's currents,<br>Find peace in uncertainty's dance,<br>Where roots grow deep yet branches bend,<br>We thrive in every circumstance.\"", "\"Embrace the flow of life's currents,<br>Find peace in uncertainty's dance,<br>Where roots grow deep yet branches bend,<br>We thrive in every circumstance.\"", true],
             ['.copyright p:nth-child(1)', '&copy; 2026 Herui Liao. All rights reserved.', '&copy; 2026 廖和睿。保留所有权利。', true],
             ['.copyright p:nth-child(2)', 'Built with GPT-5/Claude-4.5 • Hosted on GitHub Pages', '使用 GPT-5/Claude-4.5 构建 • 托管于 GitHub Pages']
         ];
@@ -1979,20 +2194,15 @@
         });
 
         // Add navbar scroll effect
-        let lastScroll = 0;
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             const currentScroll = window.pageYOffset;
 
             if (currentScroll > 50) {
-                nav.style.padding = '0.5rem 0';
                 nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.15)';
             } else {
-                nav.style.padding = '1rem 0';
                 nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
             }
-
-            lastScroll = currentScroll;
         });
     </script>
 </body>
