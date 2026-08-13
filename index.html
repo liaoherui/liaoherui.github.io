@@ -65,6 +65,11 @@
             align-items: center;
         }
 
+        .nav-tools {
+            display: flex;
+            align-items: center;
+        }
+
         .nav-social {
             display: flex;
             align-items: center;
@@ -812,6 +817,10 @@
                 display: contents;
             }
 
+            .nav-tools {
+                display: contents;
+            }
+
             .lang-toggle {
                 grid-column: 2;
                 grid-row: 1;
@@ -1062,6 +1071,199 @@
             }
         }
 
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .nav-container {
+                display: grid;
+                grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+                gap: 0.32rem 0.75rem;
+                align-items: center;
+                padding: 0.42rem 0.9rem 0.52rem;
+            }
+
+            .logo {
+                grid-column: 1;
+                grid-row: 1;
+                font-size: 1.12rem;
+                line-height: 1.1;
+            }
+
+            .nav-actions {
+                display: contents;
+            }
+
+            .nav-tools {
+                grid-column: 2;
+                grid-row: 1;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                min-width: 0;
+            }
+
+            .nav-social {
+                width: auto;
+                justify-content: flex-end;
+                gap: 0.28rem;
+            }
+
+            .nav-social a {
+                width: 28px;
+                height: 28px;
+                justify-content: center;
+                border: 1px solid #e2e8f0;
+                border-radius: 9px;
+                background: #f8fafc;
+                font-size: 0.95rem;
+            }
+
+            .nav-social a:hover {
+                background: #ede9fe;
+                transform: none;
+            }
+
+            .nav-social svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .lang-toggle {
+                min-height: 28px;
+                padding: 0.28rem 0.58rem;
+                margin-left: 0.38rem;
+                font-size: 0.76rem;
+            }
+
+            .nav-links {
+                grid-column: 1 / -1;
+                grid-row: 2;
+                width: 100%;
+                margin-right: 0;
+                padding: 0.05rem 0 0;
+                gap: 0.32rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                overflow: visible;
+            }
+
+            .nav-links li {
+                flex: 0 0 auto;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.24rem 0.54rem;
+                border: 1px solid #e2e8f0;
+                border-radius: 999px;
+                background: #f8fafc;
+                font-size: 0.76rem;
+                line-height: 1.15;
+                white-space: nowrap;
+            }
+
+            .page {
+                padding-top: 88px;
+            }
+
+            .hero {
+                padding: 1.05rem 1.15rem 1.25rem;
+            }
+
+            .hero-content {
+                grid-template-columns: minmax(0, 1.25fr) auto;
+                gap: 1rem;
+                align-items: center;
+                text-align: left;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.9rem, 4.2vw, 2.45rem);
+                margin-bottom: 0.3rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.02rem;
+                margin-bottom: 0.35rem;
+            }
+
+            .hero p {
+                font-size: 0.88rem;
+                line-height: 1.45;
+                margin-bottom: 0.7rem;
+            }
+
+            .hero .btn {
+                padding: 0.55rem 0.9rem;
+                margin: 0.1rem 0.35rem 0.1rem 0;
+                font-size: 0.82rem;
+            }
+
+            .profile-img {
+                width: 145px;
+                height: 145px;
+                border-width: 4px;
+            }
+
+            .opening-banner {
+                max-width: calc(100% - 2rem);
+                margin: -0.55rem auto 0;
+                padding: 0.82rem 1rem;
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 0.8rem;
+                border-radius: 12px;
+            }
+
+            .eyebrow {
+                font-size: 0.7rem;
+                margin-bottom: 0.22rem;
+            }
+
+            .opening-banner h2 {
+                font-size: 1rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .opening-banner p {
+                font-size: 0.8rem;
+                line-height: 1.35;
+            }
+
+            .opening-actions {
+                gap: 0.42rem;
+                justify-content: flex-end;
+            }
+
+            .opening-actions .btn {
+                width: auto;
+                padding: 0.5rem 0.78rem;
+                margin-right: 0;
+                font-size: 0.78rem;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            .stats {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 0.65rem;
+                margin: 0.85rem auto 0;
+                padding: 0 1rem;
+            }
+
+            .stat-card {
+                padding: 0.78rem 0.55rem;
+                border-radius: 12px;
+            }
+
+            .stat-card .number {
+                font-size: 1.45rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .stat-card .label {
+                font-size: 0.75rem;
+                line-height: 1.25;
+            }
+        }
+
         /* Research Interests */
         .research-interests-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1164,7 +1366,8 @@
                     <li><a onclick="showPage('join')">Join Us</a></li>
                     <li><a onclick="showPage('cv')">CV</a></li>
                 </ul>
-                <div class="nav-social">
+                <div class="nav-tools">
+                    <div class="nav-social">
                     <a href="https://github.com/liaoherui" target="_blank" title="GitHub">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -1196,8 +1399,9 @@
                             <polyline points="22,6 12,13 2,6"/>
                         </svg>
                     </a>
+                    </div>
+                    <button id="languageToggle" class="lang-toggle" type="button" onclick="toggleLanguage()" aria-label="Switch language">中文</button>
                 </div>
-                <button id="languageToggle" class="lang-toggle" type="button" onclick="toggleLanguage()" aria-label="Switch language">中文</button>
             </div>
         </div>
     </nav>
@@ -1284,7 +1488,7 @@
             <h2>About Me</h2>
             <div class="card">
                 <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-                    I am an Assistant Professor, Specially Appointed Associate Professor, and Ph.D. supervisor
+                    I am a Tenure-track Assistant Professor and Ph.D. supervisor
                     at the School of Computer Science and Artificial Intelligence, Shenzhen University of
                     Advanced Technology (SUAT). My research group works at the intersection of microbial
                     computational biology, artificial intelligence, and bioinformatics.
@@ -1934,7 +2138,7 @@
             ['.stat-card:nth-child(4) p', 'Generative AI for biology', '生成式 AI 与生物学'],
 
             ['#home > .section h2', 'About Me', '关于我'],
-            ['#home > .section .card p:nth-of-type(1)', 'I am an Assistant Professor, Specially Appointed Associate Professor, and Ph.D. supervisor at the School of Computer Science and Artificial Intelligence, Shenzhen University of Advanced Technology (SUAT). My research group works at the intersection of microbial computational biology, artificial intelligence, and bioinformatics.', '我现任深圳理工大学计算机科学与人工智能学院教研助理教授、特聘副教授、博士生导师。课题组主要围绕微生物计算生物学、人工智能与生物信息学的交叉方向开展研究。'],
+            ['#home > .section .card p:nth-of-type(1)', 'I am a Tenure-track Assistant Professor and Ph.D. supervisor at the School of Computer Science and Artificial Intelligence, Shenzhen University of Advanced Technology (SUAT). My research group works at the intersection of microbial computational biology, artificial intelligence, and bioinformatics.', '我现任深圳理工大学计算机科学与人工智能学院教研助理教授、特聘副教授、博士生导师。课题组主要围绕微生物计算生物学、人工智能与生物信息学的交叉方向开展研究。'],
             ['#home > .section .card p:nth-of-type(2)', 'Before joining SUAT, I was selected as an <strong>MIT-Novo Nordisk AI Postdoctoral Fellow</strong> and conducted postdoctoral research at MIT. I received my Ph.D. from City University of Hong Kong in 2024, after earlier work as a bioinformatics engineer.', '加入深理工前，我入选 <strong>MIT-Novo Nordisk AI Postdoctoral Fellowship</strong>，并在 MIT 从事博士后研究。我于 2024 年获得香港城市大学博士学位，此前曾从事生物信息工程相关工作。', true],
             ['#home > .section .card p:nth-of-type(3)', 'My work includes creating open-source tools like <strong>StrainScan</strong>, which provides high-resolution strain-level microbiome composition analysis, and contributing to genome annotation pipelines that accelerate biological discovery.', '我的研究包括开发 <strong>StrainScan</strong> 等开源工具，实现高分辨率菌株水平微生物组组成分析，并构建基因组注释与智能分析方法，推动生物发现。', true],
             ['#home > .section .card p:nth-of-type(4)', 'The lab is recruiting motivated researchers who enjoy building useful computational methods and asking biological questions with real-world impact.', '课题组欢迎喜欢构建实用计算方法、并希望回答有真实影响力生物学问题的同学和研究人员加入。'],
